@@ -17,8 +17,11 @@ def update_time_timezone(my_time):
 
 
 def send_message(queue, body):
-    channel = get_chanel()
-    channel.queue_declare(queue=queue)
-    channel.basic_publish(exchange='',
-                          routing_key=queue,
-                          body=body)
+    try:
+        channel = get_chanel()
+        channel.queue_declare(queue=queue)
+        channel.basic_publish(exchange='',
+                              routing_key=queue,
+                              body=body)
+    except Exception:
+        pass
