@@ -55,20 +55,25 @@ if __name__ == '__main__':
                     except Exception as e:
                         is_parse_ok = False
                         pass
+                    print(res)
 
+                    print("insta_source_parse_key_result")
                     send_message("insta_source_parse_key_result", body={
                         "id": key["id"],
                         "last_modified": update_time_timezone(timezone.localtime()).isoformat()
                     })
+                    print("insta_source_ig_session_parse")
+
                     send_message("insta_source_ig_session_parse", body={
                         "id": key["id"],
                         "last_parsing": update_time_timezone(timezone.localtime()).isoformat(),
                         "banned": banned
                     })
-                    print(res)
+                    print("insta_key_result")
+
                     send_message("insta_key_result", body=res)
                 session = None
         except Exception as e:
-            print(e)
+            print(f"While {e}")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

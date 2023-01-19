@@ -23,5 +23,6 @@ def send_message(queue, body):
         channel.basic_publish(exchange='',
                               routing_key=queue,
                               body=body)
-    except Exception:
+    except Exception as e:
+        print(f"send_message {e}")
         pass
