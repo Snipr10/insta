@@ -63,6 +63,7 @@ if __name__ == '__main__':
                         "last_parsing": update_time_timezone(timezone.localtime()).isoformat(),
                         "banned": banned
                     })
+                    print(res)
                     send_message("insta_key_result", body=res)
                 session = None
         except Exception as e:
