@@ -1,4 +1,5 @@
 import datetime
+import json
 import threading
 import time
 
@@ -40,13 +41,13 @@ if __name__ == '__main__':
                         cl = Client(
                             proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
                         cl.login(session["login"], session["password"])
-                    except Exception  as e:
+                    except Exception as e:
                         print(f"login {e}")
                         banned = True
                     res = []
                     is_parse_ok = True
                     if not banned:
-                        keyword = key["keyword"].replace(" ","")
+                        keyword = key["keyword"].replace(" ", "")
                         try:
                             print("medias_top1")
                             medias_top1 = cl.hashtag_medias_top_v1(keyword, amount=amount)
@@ -63,25 +64,20 @@ if __name__ == '__main__':
                             pass
                         print(res)
 
-                        print("insta_source_parse_key_result")
-                        print({
+                        send_message("insta_source_parse_key_result", body=json.dumps({
                             "id": key["id"],
                             "last_modified": str(update_time_timezone(datetime.datetime.now()))
-                        })
-                        send_message("insta_source_parse_key_result", body={
-                            "id": key["id"],
-                            "last_modified": str(update_time_timezone(datetime.datetime.now()))
-                        })
+                        }))
                         print("insta_source_ig_session_parse")
 
-                        send_message("insta_source_ig_session_parse", body={
+                        send_message("insta_source_ig_session_parse", body=json.dumps({
                             "id": key["id"],
                             "last_parsing": str(update_time_timezone(datetime.datetime.now())),
                             "banned": banned
-                        })
+                        }))
                         print("insta_key_result")
 
-                        send_message("insta_key_result", body=res)
+                        send_message("insta_key_result", body=json.dumps(res))
                     session = None
         except Exception as e:
             print(f"While {e}")
