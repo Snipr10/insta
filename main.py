@@ -34,7 +34,8 @@ if __name__ == '__main__':
                     cl = Client(
                         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
                     cl.login(session["login"], session["password"])
-                except Exception:
+                except Exception  as e:
+                    print(f"login {e}")
                     banned = True
                 res = []
                 is_parse_ok = True
@@ -56,11 +57,11 @@ if __name__ == '__main__':
                         pass
 
                     send_message("insta_source_parse_key_result", body={
-                        "id": key.get("id"),
+                        "id": key["id"],
                         "last_modified": update_time_timezone(timezone.localtime()).isoformat()
                     })
                     send_message("insta_source_ig_session_parse", body={
-                        "id": session.get("id"),
+                        "id": key["id"],
                         "last_parsing": update_time_timezone(timezone.localtime()).isoformat(),
                         "banned": banned
                     })
