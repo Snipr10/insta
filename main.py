@@ -71,7 +71,7 @@ if __name__ == '__main__':
                         print("insta_source_ig_session_parse")
 
                         send_message("insta_source_ig_session_parse", body=json.dumps({
-                            "id": key["id"],
+                            "id": session["id"],
                             "last_parsing": str(update_time_timezone(datetime.datetime.now())),
                             "banned": banned
                         }))
