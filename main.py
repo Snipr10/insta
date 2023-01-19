@@ -66,13 +66,13 @@ if __name__ == '__main__':
                         print("insta_source_parse_key_result")
                         send_message("insta_source_parse_key_result", body={
                             "id": key["id"],
-                            "last_modified": update_time_timezone(datetime.datetime.now()).isoformat()
+                            "last_modified": str(update_time_timezone(datetime.datetime.now()))
                         })
                         print("insta_source_ig_session_parse")
 
                         send_message("insta_source_ig_session_parse", body={
                             "id": key["id"],
-                            "last_parsing": update_time_timezone(datetime.datetime.now()).isoformat(),
+                            "last_parsing": str(update_time_timezone(datetime.datetime.now())),
                             "banned": banned
                         })
                         print("insta_key_result")

@@ -15,7 +15,6 @@ def get_chanel():
 def update_time_timezone(my_time):
     return my_time + timedelta(hours=3)
 
-
 def send_message(queue, body):
     try:
         channel = get_chanel()
