@@ -22,9 +22,12 @@ if __name__ == '__main__':
         try:
             i += 1
             print(i)
+            print(f"sessions {len(SESSIONS)}   {session}")
+
             banned = False
+
             if session is None and len(SESSIONS) == 0:
-                time.sleep(10)
+                time.sleep(60)
             else:
                 if session is None:
                     session = SESSIONS.pop(0)
