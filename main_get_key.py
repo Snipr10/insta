@@ -5,14 +5,15 @@ import pika
 
 from utils import get_chanel, KEYS
 
-if __name__ == "__main__":
+
+def get_keys():
     channel = get_chanel()
 
     def callback(ch, method, properties, body):
         try:
             print(len(KEYS))
             while len(KEYS) > 10:
-               time.sleep(2)
+                time.sleep(2)
             KEYS.append(json.loads(body.decode("utf-8")))
         except Exception as e:
             print(f"callback{e}")
@@ -21,3 +22,6 @@ if __name__ == "__main__":
 
     channel.start_consuming()
 
+
+if __name__ == "__main__":
+    get_keys()

@@ -5,15 +5,15 @@ import pika
 
 from utils import get_chanel, SESSIONS
 
-if __name__ == "__main__":
-    channel = get_chanel()
 
+def get_sessions():
+    channel = get_chanel()
 
     def callback(ch, method, properties, body):
         try:
             print(len(SESSIONS))
             while len(SESSIONS) > 10:
-               time.sleep(2)
+                time.sleep(2)
             SESSIONS.append(json.loads(body.decode("utf-8")))
         except Exception as e:
             print(f"callback{e}")
@@ -22,3 +22,6 @@ if __name__ == "__main__":
 
     channel.start_consuming()
 
+
+if __name__ == "__main__":
+    get_sessions()

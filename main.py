@@ -1,4 +1,8 @@
+import threading
 import time
+
+from main_get_key import get_keys
+from main_get_session import get_sessions
 from utils import SESSIONS, KEYS, send_message, update_time_timezone
 from instagrapi import Client
 from django.utils import timezone
@@ -8,6 +12,10 @@ session = None
 amount = 30
 if __name__ == '__main__':
     i = 0
+    x = threading.Thread(target=get_keys, args=())
+    x.start()
+    x = threading.Thread(target=get_sessions, args=())
+    x.start()
     while True:
         try:
             i += 1
