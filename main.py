@@ -31,51 +31,54 @@ if __name__ == '__main__':
             else:
                 if session is None:
                     session = SESSIONS.pop(0)
-                key = KEYS.pop(0)
-                try:
-                    print("login")
-                    cl = Client(
-                        proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
-                    cl.login(session["login"], session["password"])
-                except Exception  as e:
-                    print(f"login {e}")
-                    banned = True
-                res = []
-                is_parse_ok = True
-                if not banned:
-                    keyword = key["keyword"].replace(" ","")
+                if len(KEYS) == 0:
+                    time.sleep(60)
+                else:
+                    key = KEYS.pop(0)
                     try:
-                        print("medias_top1")
-                        medias_top1 = cl.hashtag_medias_top_v1(keyword, amount=amount)
-                        res.extend(medias_top1)
-                    except Exception as e:
-                        is_parse_ok = False
-                        pass
-                    try:
-                        print("medias_top2")
-                        medias_top2 = cl.hashtag_medias_recent_v1(keyword, amount=amount)
-                        res.extend(medias_top2)
-                    except Exception as e:
-                        is_parse_ok = False
-                        pass
-                    print(res)
+                        print("login")
+                        cl = Client(
+                            proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
+                        cl.login(session["login"], session["password"])
+                    except Exception  as e:
+                        print(f"login {e}")
+                        banned = True
+                    res = []
+                    is_parse_ok = True
+                    if not banned:
+                        keyword = key["keyword"].replace(" ","")
+                        try:
+                            print("medias_top1")
+                            medias_top1 = cl.hashtag_medias_top_v1(keyword, amount=amount)
+                            res.extend(medias_top1)
+                        except Exception as e:
+                            is_parse_ok = False
+                            pass
+                        try:
+                            print("medias_top2")
+                            medias_top2 = cl.hashtag_medias_recent_v1(keyword, amount=amount)
+                            res.extend(medias_top2)
+                        except Exception as e:
+                            is_parse_ok = False
+                            pass
+                        print(res)
 
-                    print("insta_source_parse_key_result")
-                    send_message("insta_source_parse_key_result", body={
-                        "id": key["id"],
-                        "last_modified": update_time_timezone(datetime.datetime.now()).isoformat()
-                    })
-                    print("insta_source_ig_session_parse")
+                        print("insta_source_parse_key_result")
+                        send_message("insta_source_parse_key_result", body={
+                            "id": key["id"],
+                            "last_modified": update_time_timezone(datetime.datetime.now()).isoformat()
+                        })
+                        print("insta_source_ig_session_parse")
 
-                    send_message("insta_source_ig_session_parse", body={
-                        "id": key["id"],
-                        "last_parsing": update_time_timezone(datetime.datetime.now()).isoformat(),
-                        "banned": banned
-                    })
-                    print("insta_key_result")
+                        send_message("insta_source_ig_session_parse", body={
+                            "id": key["id"],
+                            "last_parsing": update_time_timezone(datetime.datetime.now()).isoformat(),
+                            "banned": banned
+                        })
+                        print("insta_key_result")
 
-                    send_message("insta_key_result", body=res)
-                session = None
+                        send_message("insta_key_result", body=res)
+                    session = None
         except Exception as e:
             print(f"While {e}")
 
