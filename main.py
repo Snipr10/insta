@@ -1,3 +1,4 @@
+import datetime
 import threading
 import time
 
@@ -5,7 +6,6 @@ from main_get_key import get_keys
 from main_get_session import get_sessions
 from utils import SESSIONS, KEYS, send_message, update_time_timezone
 from instagrapi import Client
-from django.utils import timezone
 
 # Press the green button in the gutter to run the script.
 session = None
@@ -60,13 +60,13 @@ if __name__ == '__main__':
                     print("insta_source_parse_key_result")
                     send_message("insta_source_parse_key_result", body={
                         "id": key["id"],
-                        "last_modified": update_time_timezone(timezone.localtime()).isoformat()
+                        "last_modified": update_time_timezone(datetime.datetime.now()).isoformat()
                     })
                     print("insta_source_ig_session_parse")
 
                     send_message("insta_source_ig_session_parse", body={
                         "id": key["id"],
-                        "last_parsing": update_time_timezone(timezone.localtime()).isoformat(),
+                        "last_parsing": update_time_timezone(datetime.datetime.now()).isoformat(),
                         "banned": banned
                     })
                     print("insta_key_result")
