@@ -64,6 +64,10 @@ if __name__ == '__main__':
                         print(res)
 
                         print("insta_source_parse_key_result")
+                        print({
+                            "id": key["id"],
+                            "last_modified": str(update_time_timezone(datetime.datetime.now()))
+                        })
                         send_message("insta_source_parse_key_result", body={
                             "id": key["id"],
                             "last_modified": str(update_time_timezone(datetime.datetime.now()))
