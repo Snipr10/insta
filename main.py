@@ -7,8 +7,11 @@ from django.utils import timezone
 session = None
 amount = 30
 if __name__ == '__main__':
+    i = 0
     while True:
         try:
+            i += 1
+            print(i)
             banned = False
             if session is None and len(SESSIONS) == 0:
                 time.sleep(10)
@@ -17,6 +20,7 @@ if __name__ == '__main__':
                     session = SESSIONS.pop(0)
                 key = KEYS.pop(0)
                 try:
+                    print("login")
                     cl = Client(
                         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
                     cl.login(session["login"], session["password"])
@@ -26,12 +30,14 @@ if __name__ == '__main__':
                 is_parse_ok = True
                 if not banned:
                     try:
+                        print("medias_top1")
                         medias_top1 = cl.hashtag_medias_top_v1(key, amount=amount)
                         res.extend(medias_top1)
                     except Exception as e:
                         is_parse_ok = False
                         pass
                     try:
+                        print("medias_top2")
                         medias_top2 = cl.hashtag_medias_recent_v1(key, amount=amount)
                         res.extend(medias_top2)
                     except Exception as e:
