@@ -39,16 +39,17 @@ if __name__ == '__main__':
                 res = []
                 is_parse_ok = True
                 if not banned:
+                    keyword = key["keyword"].replace(" ","")
                     try:
                         print("medias_top1")
-                        medias_top1 = cl.hashtag_medias_top_v1(key, amount=amount)
+                        medias_top1 = cl.hashtag_medias_top_v1(keyword, amount=amount)
                         res.extend(medias_top1)
                     except Exception as e:
                         is_parse_ok = False
                         pass
                     try:
                         print("medias_top2")
-                        medias_top2 = cl.hashtag_medias_recent_v1(key, amount=amount)
+                        medias_top2 = cl.hashtag_medias_recent_v1(keyword, amount=amount)
                         res.extend(medias_top2)
                     except Exception as e:
                         is_parse_ok = False
