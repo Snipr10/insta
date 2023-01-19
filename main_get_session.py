@@ -11,7 +11,8 @@ def get_sessions():
 
     def callback(ch, method, properties, body):
         try:
-            print(len(SESSIONS))
+            print(f"SESSIONS {len(SESSIONS)}")
+
             while len(SESSIONS) > 10:
                 time.sleep(2)
             SESSIONS.append(json.loads(body.decode("utf-8")))

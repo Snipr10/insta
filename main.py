@@ -11,9 +11,11 @@ from django.utils import timezone
 session = None
 amount = 30
 if __name__ == '__main__':
+    print("get_keys")
     i = 0
     x = threading.Thread(target=get_keys, args=())
     x.start()
+    print("get_sessions")
     x = threading.Thread(target=get_sessions, args=())
     x.start()
     while True:
