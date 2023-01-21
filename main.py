@@ -68,18 +68,18 @@ if __name__ == '__main__':
                             "id": key["id"],
                             "last_modified": str(datetime.datetime.now())
                         }))
-                        print("insta_source_ig_session_parse")
-
-                        send_message("insta_source_ig_session_parse", body=json.dumps({
-                            "id": session["id"],
-                            "last_parsing": str(datetime.datetime.now()),
-                            "banned": banned
-                        }))
                         print("insta_key_result")
                         json_res = []
                         for r in res:
                             json_res.append(json.loads(r.json()))
                         send_message("insta_key_result", body=json.dumps(json_res))
+                    print("insta_source_ig_session_parse")
+
+                    send_message("insta_source_ig_session_parse", body=json.dumps({
+                        "id": session["id"],
+                        "last_parsing": str(datetime.datetime.now()),
+                        "banned": banned
+                    }))
                     session = None
         except Exception as e:
             print(f"While {e}")
