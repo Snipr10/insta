@@ -3,7 +3,7 @@ from datetime import timedelta
 
 SESSIONS = []
 KEYS = []
-
+SOURCE = []
 
 def get_chanel():
     parameters = pika.URLParameters("amqp://crawlers:rAt5HbgN9odP@192.168.5.46:5672/crawlers")
