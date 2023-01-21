@@ -21,5 +21,11 @@ if __name__ == '__main__':
     x.start()
 
     while True:
-        parse_key(session)
-        parse_source(session)
+        try:
+            parse_key(session)
+        except Exception:
+            pass
+        try:
+            parse_source(session)
+        except Exception:
+            pass
