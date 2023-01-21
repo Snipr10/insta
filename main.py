@@ -76,8 +76,10 @@ if __name__ == '__main__':
                             "banned": banned
                         }))
                         print("insta_key_result")
-
-                        send_message("insta_key_result", body=json.dumps(res))
+                        json_res = []
+                        for r in res:
+                            json_res.append(json.loads(r.json()))
+                        send_message("insta_key_result", body=json.dumps(json_res))
                     session = None
         except Exception as e:
             print(f"While {e}")
