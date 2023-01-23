@@ -6,6 +6,14 @@ import pika
 from utils import get_chanel, SESSIONS
 
 
+def get_sessions_while():
+    while True:
+        try:
+            get_sessions()
+        except Exception:
+            time.sleep(10)
+
+
 def get_sessions():
     channel = get_chanel()
 

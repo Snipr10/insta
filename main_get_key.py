@@ -6,6 +6,14 @@ import pika
 from utils import get_chanel, KEYS
 
 
+def get_keys_while():
+    while True:
+        try:
+            get_keys()
+        except Exception:
+            time.sleep(10)
+
+
 def get_keys():
     channel = get_chanel()
 

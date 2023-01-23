@@ -6,6 +6,14 @@ import pika
 from utils import get_chanel, SOURCE
 
 
+def get_source_while():
+    while True:
+        try:
+            get_source()
+        except Exception:
+            time.sleep(10)
+
+
 def get_source():
     channel = get_chanel()
 
