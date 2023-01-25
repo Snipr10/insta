@@ -15,12 +15,14 @@ def parse_source(session):
         banned = False
 
         if session is None and len(SESSIONS) == 0:
-            time.sleep(60)
+            pass
+            # time.sleep(60)
         else:
             if session is None:
                 session = SESSIONS.pop(0)
             if len(SESSIONS) == 0:
-                time.sleep(60)
+                print("No sessions")
+                # time.sleep(60)
             else:
                 source = SOURCE.pop(0)
                 try:

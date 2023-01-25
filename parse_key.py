@@ -15,13 +15,14 @@ def parse_key(session):
         banned = False
 
         if session is None and len(SESSIONS) == 0:
-            time.sleep(60)
+            pass
+            # time.sleep(60)
         else:
             if session is None:
                 session = SESSIONS.pop(0)
             if len(KEYS) == 0:
                 print("No Keys")
-                time.sleep(60)
+                # time.sleep(60)
             else:
                 key = KEYS.pop(0)
                 try:
