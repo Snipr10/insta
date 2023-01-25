@@ -10,7 +10,7 @@ amount = 30
 
 def parse_key(session):
     try:
-        print(f"sessions {len(SESSIONS)}   {session}")
+        # print(f"sessions {len(SESSIONS)}   {session}")
 
         banned = False
 
