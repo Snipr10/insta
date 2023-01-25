@@ -56,11 +56,11 @@ def parse_source(session):
                     send_message("insta_key_result", body=json.dumps(json_res))
 
                 print("insta_source_ig_session_parse")
-                send_message("insta_source_ig_session_parse", body=json.dumps({
+            send_message("insta_source_ig_session_parse", body=json.dumps({
                     "id": session["id"],
                     "last_parsing": str(datetime.datetime.now()),
                     "banned": banned
                 }))
-                session = None
+            session = None
     except Exception as e:
         print(f"While {e}")
