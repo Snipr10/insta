@@ -25,7 +25,14 @@ def parse_key(session):
                 # time.sleep(60)
             else:
                 key = KEYS.pop(0)
-
+                try:
+                    print("login")
+                    cl = Client(
+                        proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
+                    cl.login(session["login"], session["password"])
+                except Exception as e:
+                    print(f"login {e}")
+                    banned = True
                 res = []
                 is_parse_ok = True
                 if not banned:
