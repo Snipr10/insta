@@ -19,7 +19,7 @@ def parse_source(session):
         else:
             if session is None:
                 session = SESSIONS.pop(0)
-            if len(KEYS) == 0:
+            if len(SESSIONS) == 0:
                 time.sleep(60)
             else:
                 source = SOURCE.pop(0)

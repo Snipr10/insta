@@ -20,6 +20,7 @@ def parse_key(session):
             if session is None:
                 session = SESSIONS.pop(0)
             if len(KEYS) == 0:
+                print("No Keys")
                 time.sleep(60)
             else:
                 key = KEYS.pop(0)
