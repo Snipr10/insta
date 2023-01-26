@@ -51,6 +51,14 @@ def parse_key(session):
                     except Exception as e:
                         is_parse_ok = False
                         pass
+                    try:
+                        for h in cl.search_hashtags(key["keyword"]):
+                            medias_top1 = cl.hashtag_medias_top_v1(h.name, amount=amount)
+                            res.extend(medias_top1)
+                            medias_top2 = cl.hashtag_medias_recent_v1(h.name, amount=amount)
+                            res.extend(medias_top2)
+                    except Exception as e:
+                        pass
                     print(res)
 
                     send_message("insta_source_parse_key_result", body=json.dumps({
