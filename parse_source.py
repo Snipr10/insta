@@ -37,7 +37,7 @@ def parse_source(session):
                 is_parse_ok = True
                 if not banned:
                     try:
-                        user_id = cl.user_id_from_username("sosedi_spch")
+                        user_id = cl.user_id_from_username(source["data"])
                         res = cl.user_medias(user_id, amount)
                     except Exception as e:
                         is_parse_ok = False
