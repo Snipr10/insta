@@ -31,12 +31,13 @@ def parse_key(session):
                     if session['session_id'] is None:
                         raise Exception('session_id is None')
 
-                    m = Client(
+                    cl = Client(
                         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
                     )
-                    m.init()
-                    m.login_by_sessionid(session['session_id'])
+                    cl.init()
+                    cl.login_by_sessionid(session['session_id'])
                     session_id = session['session_id']
+                    print(f"Login Successfull {session_id}")
                 except Exception as e:
                     try:
                         print("login")
@@ -57,6 +58,7 @@ def parse_key(session):
                         medias_top1 = cl.hashtag_medias_top_v1(keyword, amount=amount)
                         res.extend(medias_top1)
                     except Exception as e:
+                        print(f"{e} {session_id}")
                         is_parse_ok = False
                         pass
                     try:
@@ -64,6 +66,7 @@ def parse_key(session):
                         medias_top2 = cl.hashtag_medias_recent_v1(keyword, amount=amount)
                         res.extend(medias_top2)
                     except Exception as e:
+                        print(f"{e} {session_id}")
                         is_parse_ok = False
                         pass
                     try:
@@ -73,6 +76,7 @@ def parse_key(session):
                             medias_top2 = cl.hashtag_medias_recent_v1(h.name, amount=amount)
                             res.extend(medias_top2)
                     except Exception as e:
+                        print(f"{e} {session_id}")
                         pass
                     print(res)
 

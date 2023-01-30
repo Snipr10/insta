@@ -33,11 +33,11 @@ def parse_source(session):
                     print(f"session_id {session_id}")
                     if session['session_id'] is None:
                         raise Exception('session_id is None')
-                    m = Client(
+                    cl = Client(
                         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
                     )
-                    m.init()
-                    m.login_by_sessionid(session['session_id'])
+                    cl.init()
+                    cl.login_by_sessionid(session['session_id'])
                     session_id = session['session_id']
                 except Exception as e:
                     print(f"session id {e} {session_id}")
