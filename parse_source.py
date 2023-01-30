@@ -78,5 +78,7 @@ def parse_source(session):
                     "session_id": session_id
             }))
             session = None
+
     except Exception as e:
         print(f"While {e}")
+    return session

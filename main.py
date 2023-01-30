@@ -22,10 +22,10 @@ if __name__ == '__main__':
 
     while True:
         try:
-            parse_key(session)
+            session = parse_key(session)
         except Exception as e:
             print(f"parse_key: {e}")
         try:
-            parse_source(session)
+            session = parse_source(session)
         except Exception as e:
             print(f"parse_source: {e}")
