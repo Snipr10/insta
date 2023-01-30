@@ -20,19 +20,32 @@ def parse_source(session):
         else:
             if session is None:
                 session = SESSIONS.pop(0)
+            session_id = session['session_id']
             if len(SESSIONS) == 0:
                 print("No sessions")
                 # time.sleep(60)
             else:
                 source = SOURCE.pop(0)
                 try:
-                    print("login")
-                    cl = Client(
-                        proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
-                    cl.login(session["login"], session["password"])
+                    if session['session_id'] is None:
+                        raise Exception('session_id is None')
+                    m = Client(
+                        proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
+                    )
+                    m.init()
+                    m.login_by_sessionid(session['session_id'])
+                    session_id = session['session_id']
                 except Exception as e:
-                    print(f"login {e}")
-                    banned = True
+                    try:
+                        print("login")
+                        cl = Client(
+                            proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
+                        cl.login(session["login"], session["password"])
+                        session_id = cl.authorization_data['sessionid']
+                    except Exception as e:
+                        session_id = None
+                        print(f"login {e}")
+                        banned = True
                 res = []
                 is_parse_ok = True
                 if not banned:
@@ -59,8 +72,9 @@ def parse_source(session):
             send_message("insta_source_ig_session_parse", body=json.dumps({
                     "id": session["id"],
                     "last_parsing": str(datetime.datetime.now()),
-                    "banned": banned
-                }))
+                    "banned": banned,
+                    "session_id": session_id
+            }))
             session = None
     except Exception as e:
         print(f"While {e}")
