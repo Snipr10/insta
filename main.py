@@ -22,6 +22,7 @@ if __name__ == '__main__':
     x.start()
 
     while True:
+        print("start")
         try:
             session = parse_key(session)
         except Exception as e:
