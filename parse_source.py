@@ -27,6 +27,7 @@ def parse_source(session):
             else:
                 source = SOURCE.pop(0)
                 try:
+                    print(f"session_id {session_id}")
                     if session['session_id'] is None:
                         raise Exception('session_id is None')
                     m = Client(
@@ -36,6 +37,7 @@ def parse_source(session):
                     m.login_by_sessionid(session['session_id'])
                     session_id = session['session_id']
                 except Exception as e:
+                    print(f"session id {e} {session_id}")
                     try:
                         print("login")
                         cl = Client(
