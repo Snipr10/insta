@@ -20,16 +20,17 @@ def parse_key(session):
         else:
             if session is None:
                 session = SESSIONS.pop(0)
+            print(session)
             session_id = session['session_id']
             if len(KEYS) == 0:
                 print("No Keys")
                 # time.sleep(60)
             else:
                 key = KEYS.pop(0)
-
                 try:
                     if session['session_id'] is None:
                         raise Exception('session_id is None')
+
                     m = Client(
                         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
                     )

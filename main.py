@@ -1,4 +1,5 @@
 import threading
+import time
 
 from main_get_key import get_keys, get_keys_while
 from main_get_session import get_sessions, get_sessions_while
@@ -29,3 +30,4 @@ if __name__ == '__main__':
             session = parse_source(session)
         except Exception as e:
             print(f"parse_source: {e}")
+        time.sleep(60*2)

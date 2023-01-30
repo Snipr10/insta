@@ -20,12 +20,15 @@ def parse_source(session):
         else:
             if session is None:
                 session = SESSIONS.pop(0)
+            print(session)
+
             session_id = session['session_id']
             if len(SESSIONS) == 0:
                 print("No sessions")
                 # time.sleep(60)
             else:
                 source = SOURCE.pop(0)
+
                 try:
                     print(f"session_id {session_id}")
                     if session['session_id'] is None:
