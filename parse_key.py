@@ -27,6 +27,8 @@ def parse_key(session):
                 # time.sleep(60)
             else:
                 key = KEYS.pop(0)
+                print(key)
+
                 try:
                     if session['session_id'] is None:
                         raise Exception('session_id is None')

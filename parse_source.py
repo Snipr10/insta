@@ -28,7 +28,7 @@ def parse_source(session):
                 # time.sleep(60)
             else:
                 source = SOURCE.pop(0)
-
+                print(source)
                 try:
                     print(f"session_id {session_id}")
                     if session['session_id'] is None:
