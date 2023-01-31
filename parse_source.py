@@ -41,6 +41,7 @@ def parse_source(session):
                     session_id = session['session_id']
                 except Exception as e:
                     print(f"session id {e} {session_id}")
+                    session_id = None
                     try:
                         print("login")
                         cl = Client(

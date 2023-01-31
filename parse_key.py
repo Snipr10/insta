@@ -41,6 +41,7 @@ def parse_key(session):
                     session_id = session['session_id']
                     print(f"Login Successfull {session_id}")
                 except Exception as e:
+                    session_id = None
                     try:
                         print("login")
                         cl = Client(
