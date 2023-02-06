@@ -5,7 +5,7 @@ import time
 
 from utils import SESSIONS, KEYS, send_message, SOURCE
 from instagrapi import Client
-amount = 30
+amount = 15
 
 
 def parse_key(session):
@@ -56,22 +56,22 @@ def parse_key(session):
                 is_parse_ok = True
                 if not banned:
                     keyword = key["keyword"].replace(" ", "")
-                    try:
-                        print("medias_top1")
-                        medias_top1 = cl.hashtag_medias_top_v1(keyword, amount=amount)
-                        res.extend(medias_top1)
-                    except Exception as e:
-                        print(f"{e} {session_id}")
-                        is_parse_ok = False
-                        pass
-                    try:
-                        print("medias_top2")
-                        medias_top2 = cl.hashtag_medias_recent_v1(keyword, amount=amount)
-                        res.extend(medias_top2)
-                    except Exception as e:
-                        print(f"{e} {session_id}")
-                        is_parse_ok = False
-                        pass
+                    # try:
+                    #     print("medias_top1")
+                    #     medias_top1 = cl.hashtag_medias_top_v1(keyword, amount=amount)
+                    #     res.extend(medias_top1)
+                    # except Exception as e:
+                    #     print(f"{e} {session_id}")
+                    #     is_parse_ok = False
+                    #     pass
+                    # try:
+                    #     print("medias_top2")
+                    #     medias_top2 = cl.hashtag_medias_recent_v1(keyword, amount=amount)
+                    #     res.extend(medias_top2)
+                    # except Exception as e:
+                    #     print(f"{e} {session_id}")
+                    #     is_parse_ok = False
+                    #     pass
                     try:
                         for h in cl.search_hashtags(key["keyword"]):
                             medias_top1 = cl.hashtag_medias_top_v1(h.name, amount=amount)

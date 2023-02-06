@@ -5,7 +5,7 @@ import time
 from utils import SESSIONS, KEYS, send_message, SOURCE
 from instagrapi import Client
 
-amount = 30
+amount = 15
 
 
 def parse_source(session):
