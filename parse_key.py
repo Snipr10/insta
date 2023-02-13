@@ -13,7 +13,7 @@ def parse_key(session):
         # print(f"sessions {len(SESSIONS)}   {session}")
 
         banned = False
-
+        error_message = ""
         if session is None and len(SESSIONS) == 0:
             pass
             # time.sleep(60)
@@ -41,6 +41,7 @@ def parse_key(session):
                     session_id = session['session_id']
                     print(f"Login Successfull {session_id}")
                 except Exception as e:
+                    error_message = str(e)
                     session_id = None
                     try:
                         print("login")
@@ -49,6 +50,7 @@ def parse_key(session):
                         cl.login(session["login"], session["password"])
                         session_id = cl.authorization_data['sessionid']
                     except Exception as e:
+                        error_message = str(e)
                         session_id = None
                         print(f"login {e}")
                         banned = True
@@ -79,6 +81,7 @@ def parse_key(session):
                             medias_top2 = cl.hashtag_medias_recent_v1(h.name, amount=amount)
                             res.extend(medias_top2)
                     except Exception as e:
+                        error_message = str(e)
                         print(f"{e} {session_id}")
                         pass
                     print(res)
@@ -98,6 +101,7 @@ def parse_key(session):
                     "id": session["id"],
                     "last_parsing": str(datetime.datetime.now()),
                     "banned": banned,
+                    "error_message": error_message,
                     "session_id": session_id
                 }))
             session = None

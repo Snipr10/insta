@@ -13,6 +13,7 @@ def parse_source(session):
         # print(f"sessions {len(SESSIONS)}   {session}")
 
         banned = False
+        error_message = ""
 
         if session is None and len(SESSIONS) == 0:
             pass
@@ -40,6 +41,7 @@ def parse_source(session):
                     cl.login_by_sessionid(session['session_id'])
                     session_id = session['session_id']
                 except Exception as e:
+                    error_message = str(e)
                     print(f"session id {e} {session_id}")
                     session_id = None
                     try:
@@ -49,6 +51,7 @@ def parse_source(session):
                         cl.login(session["login"], session["password"])
                         session_id = cl.authorization_data['sessionid']
                     except Exception as e:
+                        error_message = str(e)
                         session_id = None
                         print(f"login {e}")
                         banned = True
@@ -76,10 +79,11 @@ def parse_source(session):
 
                 print("insta_source_ig_session_parse")
             send_message("insta_source_ig_session_parse", body=json.dumps({
-                    "id": session["id"],
-                    "last_parsing": str(datetime.datetime.now()),
-                    "banned": banned,
-                    "session_id": session_id
+                "id": session["id"],
+                "last_parsing": str(datetime.datetime.now()),
+                "banned": banned,
+                "error_message": error_message,
+                "session_id": session_id
             }))
             session = None
 
