@@ -2,7 +2,7 @@ import datetime
 import json
 import time
 
-from utils import SESSIONS, KEYS, send_message, SOURCE
+from utils import SESSIONS, KEYS, send_message, SOURCE, challenge_code_handler
 from instagrapi import Client
 
 amount = 15
@@ -37,6 +37,7 @@ def parse_source(session):
                     cl = Client(
                         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
                     )
+                    cl.challenge_code_handler = challenge_code_handler
                     cl.init()
                     cl.login_by_sessionid(session['session_id'])
                     session_id = session['session_id']
@@ -48,6 +49,7 @@ def parse_source(session):
                         print("login")
                         cl = Client(
                             proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
+                        cl.challenge_code_handler = challenge_code_handler
                         cl.login(session["login"], session["password"])
                         session_id = cl.authorization_data['sessionid']
                     except Exception as e:

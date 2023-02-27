@@ -5,6 +5,7 @@ SESSIONS = []
 KEYS = []
 SOURCE = []
 
+
 def get_chanel():
     parameters = pika.URLParameters("amqp://crawlers:rAt5HbgN9odP@192.168.5.46:5672/crawlers")
     connection = pika.BlockingConnection(parameters=parameters)
@@ -14,6 +15,7 @@ def get_chanel():
 
 def update_time_timezone(my_time):
     return my_time + timedelta(hours=3)
+
 
 def send_message(queue, body):
     try:
@@ -25,3 +27,12 @@ def send_message(queue, body):
     except Exception as e:
         print(f"send_message {e}")
         pass
+
+
+def challenge_code_handler(username, choice):
+    from instagrapi.mixins.challenge import ChallengeChoice
+    if choice == ChallengeChoice.SMS:
+        return None
+    elif choice == ChallengeChoice.EMAIL:
+        return None
+    return False
