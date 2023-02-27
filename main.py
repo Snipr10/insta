@@ -25,43 +25,43 @@ if __name__ == '__main__':
     while True:
         print("start")
         try:
-            p = multiprocessing.Process(target=parse_key, name="parse_key", args=(None, ))
-            p.start()
-            n = 0
-            while n < 360:
-                if p.is_alive():
-                    n += 1
-                else:
-                    n = 360
-                try:
-                    p.terminate()
-                except Exception:
-                    pass
-                try:
-                    p.join()
-                except Exception:
-                    pass
-            # session = parse_key(session)
+            # p = multiprocessing.Process(target=parse_key, name="parse_key", args=(None, ))
+            # p.start()
+            # n = 0
+            # while n < 360:
+            #     if p.is_alive():
+            #         n += 1
+            #     else:
+            #         n = 360
+            #     try:
+            #         p.terminate()
+            #     except Exception:
+            #         pass
+            #     try:
+            #         p.join()
+            #     except Exception:
+            #         pass
+            session = parse_key(session)
         except Exception as e:
             print(f"parse_key: {e}")
         try:
-            # session = parse_source(session)
-            p = multiprocessing.Process(target=parse_source, name="parse_source", args=(None,))
-            p.start()
-            n = 0
-            while n < 360:
-                if p.is_alive():
-                    n += 1
-                else:
-                    n = 360
-                try:
-                    p.terminate()
-                except Exception:
-                    pass
-                try:
-                    p.join()
-                except Exception:
-                    pass
+            session = parse_source(session)
+            # p = multiprocessing.Process(target=parse_source, name="parse_source", args=(None,))
+            # p.start()
+            # n = 0
+            # while n < 360:
+            #     if p.is_alive():
+            #         n += 1
+            #     else:
+            #         n = 360
+            #     try:
+            #         p.terminate()
+            #     except Exception:
+            #         pass
+            #     try:
+            #         p.join()
+            #     except Exception:
+            #         pass
         except Exception as e:
             print(f"parse_source: {e}")
         time.sleep(60)
