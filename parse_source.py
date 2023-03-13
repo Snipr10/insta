@@ -30,13 +30,14 @@ def parse_source(session):
             print(session)
 
             # session_id = session['session_id']
-            settings = session['settings']
 
             if len(SESSIONS) == 0:
                 print("No sessions")
+                raise Exception("No sessions")
                 # time.sleep(60)
             else:
                 source = SOURCE.pop(0)
+                settings = session['settings']
                 print(source)
                 print(f"source date {source['last_modified']}")
                 print(f"source date {datetime.datetime.fromisoformat(source['last_modified'])}")
