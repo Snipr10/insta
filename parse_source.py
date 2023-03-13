@@ -43,15 +43,12 @@ def parse_source(session):
                     proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
                     settings=session['settings']
                 )
-                print(f"settings {settings}")
                 settings = cl.get_settings()
-                print(f"new settings {settings}")
+
 
                 try:
+                    print("start user")
                     user_id = cl.user_id_from_username(source["data"])
-                    res = cl.user_medias(user_id, amount)
-                    settings = cl.get_settings()
-
                 except UserNotFound:
                     disabled = True
                 except Exception as e:
@@ -61,55 +58,26 @@ def parse_source(session):
                         print(f"user_id {e}")
                         is_parse_ok = False
                         banned = True
-                # if not disabled and not is_parse_ok:
-                #     try:
-                #         # print(f"session_id {session_id}")
-                #         if session['session_id'] is None:
-                #             raise Exception('session_id is None')
-                #         cl = Client(
-                #             proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
-                #             settings=session['settings']
-                #
-                #         )
-                #         cl.challenge_code_handler = challenge_code_handler
-                #         # cl.init()
-                #         # cl.login_by_sessionid(session['session_id'])
-                #         session_id = session['session_id']
-                #         settings = cl.get_settings()
-                #
-                #     except Exception as e:
-                #         error_message = str(e)
-                #         print(f"session id {e} {session_id}")
-                #         session_id = None
-                #         settings = None
-                #         # try:
-                #         #     print("login")
-                #         #     cl = Client(
-                #         #         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
-                #         #     cl.challenge_code_handler = challenge_code_handler
-                #         #     cl.login(session["login"], session["password"])
-                #         #     session_id = cl.authorization_data['sessionid']
-                #         # except Exception as e:
-                #         #     error_message = str(e)
-                #         #     session_id = None
-                #         #     print(f"login {e}")
-                #         #     banned = True
-                #     res = []
-                #     is_parse_ok = True
-                #     if not banned:
-                #         try:
-                #             user_id = cl.user_id_from_username(source["data"])
-                #             res = cl.user_medias(user_id, amount)
-                #             settings = cl.get_settings()
-                #         except UserNotFound:
-                #             disabled = True
-                #         except Exception as e:
-                #             is_parse_ok = False
-                #             pass
+
+                if not banned and not disabled:
+                    try:
+                        print("start user")
+                        res = cl.user_medias(user_id, amount)
+                        settings = cl.get_settings()
+
+                    except UserNotFound:
+                        disabled = True
+                    except Exception as e:
+                        if "Status 404" in e:
+                            disabled = True
+                        else:
+                            print(f"user_id {e}")
+                            is_parse_ok = False
+                            banned = True
 
             print(res)
             # if is_parse_ok:
-
+            print(f"disabled {disabled}")
             send_message("insta_source_parse_result", body=json.dumps({
                                 "id": source["id"],
                                 "last_modified": str(datetime.datetime.now()),
