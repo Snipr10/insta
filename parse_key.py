@@ -22,7 +22,7 @@ def parse_key(session):
             if session is None:
                 session = SESSIONS.pop(0)
             print(session)
-            session_id = session['session_id']
+            # session_id = session['session_id']
             settings = session['settings']
             if len(KEYS) == 0:
                 print("No Keys")
@@ -32,8 +32,8 @@ def parse_key(session):
                 print(key)
 
                 try:
-                    if session['session_id'] is None:
-                        raise Exception('session_id is None')
+                    # if session['session_id'] is None:
+                    #     raise Exception('session_id is None')
 
                     cl = Client(
                         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
@@ -91,7 +91,7 @@ def parse_key(session):
                         settings = cl.get_settings()
                     except Exception as e:
                         error_message = str(e)
-                        print(f"search_hashtags {e} {session_id}")
+                        print(f"search_hashtags {e}")
                         pass
                     print(res)
 
@@ -110,7 +110,7 @@ def parse_key(session):
                     "last_parsing": str(datetime.datetime.now()),
                     "banned": banned,
                     "error_message": error_message,
-                    "session_id": session_id,
+                    "session_id": None,
                     "settings": settings
                 }))
             session = None
