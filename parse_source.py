@@ -29,7 +29,7 @@ def parse_source(session):
 
             print(session)
 
-            session_id = session['session_id']
+            # session_id = session['session_id']
             settings = session['settings']
 
             if len(SESSIONS) == 0:
@@ -53,52 +53,54 @@ def parse_source(session):
                 except UserNotFound:
                     disabled = True
                 except Exception as e:
+                    print(f"user_id {e}")
                     is_parse_ok = False
-                if not disabled and not is_parse_ok:
-                    try:
-                        print(f"session_id {session_id}")
-                        if session['session_id'] is None:
-                            raise Exception('session_id is None')
-                        cl = Client(
-                            proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
-                            settings=session['settings']
-
-                        )
-                        cl.challenge_code_handler = challenge_code_handler
-                        # cl.init()
-                        # cl.login_by_sessionid(session['session_id'])
-                        session_id = session['session_id']
-                        settings = cl.get_settings()
-
-                    except Exception as e:
-                        error_message = str(e)
-                        print(f"session id {e} {session_id}")
-                        session_id = None
-                        settings = None
-                        # try:
-                        #     print("login")
-                        #     cl = Client(
-                        #         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
-                        #     cl.challenge_code_handler = challenge_code_handler
-                        #     cl.login(session["login"], session["password"])
-                        #     session_id = cl.authorization_data['sessionid']
-                        # except Exception as e:
-                        #     error_message = str(e)
-                        #     session_id = None
-                        #     print(f"login {e}")
-                        #     banned = True
-                    res = []
-                    is_parse_ok = True
-                    if not banned:
-                        try:
-                            user_id = cl.user_id_from_username(source["data"])
-                            res = cl.user_medias(user_id, amount)
-                            settings = cl.get_settings()
-                        except UserNotFound:
-                            disabled = True
-                        except Exception as e:
-                            is_parse_ok = False
-                            pass
+                    banned = True
+                # if not disabled and not is_parse_ok:
+                #     try:
+                #         # print(f"session_id {session_id}")
+                #         if session['session_id'] is None:
+                #             raise Exception('session_id is None')
+                #         cl = Client(
+                #             proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
+                #             settings=session['settings']
+                #
+                #         )
+                #         cl.challenge_code_handler = challenge_code_handler
+                #         # cl.init()
+                #         # cl.login_by_sessionid(session['session_id'])
+                #         session_id = session['session_id']
+                #         settings = cl.get_settings()
+                #
+                #     except Exception as e:
+                #         error_message = str(e)
+                #         print(f"session id {e} {session_id}")
+                #         session_id = None
+                #         settings = None
+                #         # try:
+                #         #     print("login")
+                #         #     cl = Client(
+                #         #         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
+                #         #     cl.challenge_code_handler = challenge_code_handler
+                #         #     cl.login(session["login"], session["password"])
+                #         #     session_id = cl.authorization_data['sessionid']
+                #         # except Exception as e:
+                #         #     error_message = str(e)
+                #         #     session_id = None
+                #         #     print(f"login {e}")
+                #         #     banned = True
+                #     res = []
+                #     is_parse_ok = True
+                #     if not banned:
+                #         try:
+                #             user_id = cl.user_id_from_username(source["data"])
+                #             res = cl.user_medias(user_id, amount)
+                #             settings = cl.get_settings()
+                #         except UserNotFound:
+                #             disabled = True
+                #         except Exception as e:
+                #             is_parse_ok = False
+                #             pass
 
             print(res)
             # if is_parse_ok:
@@ -121,7 +123,7 @@ def parse_source(session):
                 "last_parsing": str(datetime.datetime.now()),
                 "banned": banned,
                 "error_message": error_message,
-                "session_id": session_id,
+                "session_id": None,
                 "settings": settings,
             }))
             session = None
