@@ -82,7 +82,7 @@ def parse_source(session):
             print(f"disabled {disabled}")
             send_message("insta_source_parse_result", body=json.dumps({
                                 "id": source["id"],
-                                "last_modified": str(datetime.datetime.now()) if banned or disabled else session["last_modified"],
+                                "last_modified": str(datetime.datetime.now()) if banned or disabled else source["last_modified"],
                                 "disabled": disabled,
 
             }))
