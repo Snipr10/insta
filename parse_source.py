@@ -38,6 +38,8 @@ def parse_source(session):
             else:
                 source = SOURCE.pop(0)
                 print(source)
+                print(f"source date {source['last_modified']}")
+                print(f"source date {datetime.datetime.fromisoformat(source['last_modified'])}")
 
                 cl = Client(
                     proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
@@ -80,7 +82,7 @@ def parse_source(session):
             print(f"disabled {disabled}")
             send_message("insta_source_parse_result", body=json.dumps({
                                 "id": source["id"],
-                                "last_modified": str(datetime.datetime.now()),
+                                "last_modified": str(datetime.datetime.now()) if banned or disabled else session["last_modified"],
                                 "disabled": disabled,
 
             }))
