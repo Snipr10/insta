@@ -55,9 +55,12 @@ def parse_source(session):
                 except UserNotFound:
                     disabled = True
                 except Exception as e:
-                    print(f"user_id {e}")
-                    is_parse_ok = False
-                    banned = True
+                    if "Status 404" in e:
+                        disabled = True
+                    else:
+                        print(f"user_id {e}")
+                        is_parse_ok = False
+                        banned = True
                 # if not disabled and not is_parse_ok:
                 #     try:
                 #         # print(f"session_id {session_id}")
