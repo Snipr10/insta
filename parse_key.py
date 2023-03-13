@@ -90,6 +90,7 @@ def parse_key(session):
                             res.extend(medias_top2)
                         settings = cl.get_settings()
                     except Exception as e:
+                        banned = True
                         error_message = str(e)
                         print(f"search_hashtags {e}")
                         pass
