@@ -15,7 +15,7 @@ def parse_source(session):
 
         banned = False
         error_message = ""
-        disabled = False
+        disabled = 0
         is_parse_ok = True
         res = []
         settings = None
@@ -50,10 +50,10 @@ def parse_source(session):
                     print("start user")
                     user_id = cl.user_id_from_username(source["data"])
                 except UserNotFound:
-                    disabled = True
+                    disabled = 1
                 except Exception as e:
                     if "Status 404" in e:
-                        disabled = True
+                        disabled = 1
                     else:
                         print(f"user_id {e}")
                         is_parse_ok = False
@@ -66,10 +66,10 @@ def parse_source(session):
                         settings = cl.get_settings()
 
                     except UserNotFound:
-                        disabled = True
+                        disabled = 1
                     except Exception as e:
                         if "Status 404" in e:
-                            disabled = True
+                            disabled = 1
                         else:
                             print(f"user_id {e}")
                             is_parse_ok = False
