@@ -43,7 +43,9 @@ def parse_source(session):
                     proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
                     settings=session['settings']
                 )
+                print(f"settings {settings}")
                 settings = cl.get_settings()
+                print(f"new settings {settings}")
 
                 try:
                     user_id = cl.user_id_from_username(source["data"])
