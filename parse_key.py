@@ -46,6 +46,7 @@ def parse_key(session):
                     # session_id = session['session_id']
                     # print(f"Login Successfull {session_id}")
                 except Exception as e:
+                    print(f"Client {e}")
                     banned = True
                     # error_message = str(e)
                     # session_id = None
@@ -90,7 +91,7 @@ def parse_key(session):
                         settings = cl.get_settings()
                     except Exception as e:
                         error_message = str(e)
-                        print(f"{e} {session_id}")
+                        print(f"search_hashtags {e} {session_id}")
                         pass
                     print(res)
 
@@ -98,7 +99,6 @@ def parse_key(session):
                         "id": key["id"],
                         "last_modified": str(datetime.datetime.now())
                     }))
-                    print("insta_key_result")
                     json_res = []
                     for r in res:
                         json_res.append(json.loads(r.json()))
