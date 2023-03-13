@@ -14,6 +14,7 @@ def parse_key(session):
 
         banned = False
         error_message = ""
+        settings = None
         if session is None and len(SESSIONS) == 0:
             pass
             # time.sleep(60)
@@ -22,6 +23,7 @@ def parse_key(session):
                 session = SESSIONS.pop(0)
             print(session)
             session_id = session['session_id']
+            settings = session['settings']
             if len(KEYS) == 0:
                 print("No Keys")
                 # time.sleep(60)
@@ -35,28 +37,30 @@ def parse_key(session):
 
                     cl = Client(
                         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
+                        settings=session['settings']
                     )
                     cl.challenge_code_handler = challenge_code_handler
-
-                    cl.init()
-                    cl.login_by_sessionid(session['session_id'])
-                    session_id = session['session_id']
-                    print(f"Login Successfull {session_id}")
+                    settings = cl.get_settings()
+                    # cl.init()
+                    # cl.login_by_sessionid(session['session_id'])
+                    # session_id = session['session_id']
+                    # print(f"Login Successfull {session_id}")
                 except Exception as e:
-                    error_message = str(e)
-                    session_id = None
-                    try:
-                        print("login")
-                        cl = Client(
-                            proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
-                        cl.challenge_code_handler = challenge_code_handler
-                        cl.login(session["login"], session["password"])
-                        session_id = cl.authorization_data['sessionid']
-                    except Exception as e:
-                        error_message = str(e)
-                        session_id = None
-                        print(f"login {e}")
-                        banned = True
+                    banned = True
+                    # error_message = str(e)
+                    # session_id = None
+                    # try:
+                    #     print("login")
+                    #     cl = Client(
+                    #         proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}")
+                    #     cl.challenge_code_handler = challenge_code_handler
+                    #     cl.login(session["login"], session["password"])
+                    #     session_id = cl.authorization_data['sessionid']
+                    # except Exception as e:
+                    #     error_message = str(e)
+                    #     session_id = None
+                    #     print(f"login {e}")
+                    #     banned = True
                 res = []
                 is_parse_ok = True
                 if not banned:
@@ -83,6 +87,7 @@ def parse_key(session):
                             res.extend(medias_top1)
                             medias_top2 = cl.hashtag_medias_recent_v1(h.name, amount=amount)
                             res.extend(medias_top2)
+                        settings = cl.get_settings()
                     except Exception as e:
                         error_message = str(e)
                         print(f"{e} {session_id}")
@@ -105,8 +110,10 @@ def parse_key(session):
                     "last_parsing": str(datetime.datetime.now()),
                     "banned": banned,
                     "error_message": error_message,
-                    "session_id": session_id
+                    "session_id": session_id,
+                    "settings": settings
                 }))
             session = None
+            settings = None
     except Exception as e:
         print(f"While {e}")
