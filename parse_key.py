@@ -16,7 +16,7 @@ def parse_key(session):
         error_message = ""
         settings = None
         if session is None and len(SESSIONS) == 0:
-            pass
+            raise Exception("no sessions")
             # time.sleep(60)
         else:
             if session is None:
