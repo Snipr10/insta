@@ -1,16 +1,14 @@
 import threading
 import time
-import multiprocessing
 
-from main_get_key import get_keys, get_keys_while
-from main_get_session import get_sessions, get_sessions_while
-from main_get_source import get_source, get_source_while
+from main_get_key import get_keys_while
+from main_get_session import get_sessions_while
+from main_get_source import get_source_while
 from parse_key import parse_key
 from parse_source import parse_source
 
 session = None
 amount = 30
-
 
 
 if __name__ == '__main__':
