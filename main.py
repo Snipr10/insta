@@ -65,4 +65,4 @@ if __name__ == '__main__':
             #         pass
         except Exception as e:
             print(f"parse_source: {e}")
-        time.sleep(60)
+        time.sleep(5)
