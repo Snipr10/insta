@@ -89,13 +89,13 @@ def parse_key(session):
                             medias_raw = []
                             try:
                                 for i in range(10):
-                                    res = cl.private.get(
+                                    result = cl.private.get(
                                         'https://i.instagram.com/api/v1/fbsearch/search_engine_result_page/',
                                         params={'query': key["keyword"], 'next_max_id': next_max_id},
                                         proxies=cl.private.proxies
                                     ).json()
-                                    next_max_id = res['reels_max_id']
-                                    for s in res['sections']:
+                                    next_max_id = result['reels_max_id']
+                                    for s in result['sections']:
                                         # extract_media_v1(node["media"])
                                         try:
                                             layout_content = s['layout_content']
@@ -144,6 +144,7 @@ def parse_key(session):
                     json_res = []
                     for r in res:
                         json_res.append(json.loads(r.json()))
+                    print(f"send {len(json_res)}")
                     send_message("insta_key_result", body=json.dumps(json_res))
                 print("insta_source_ig_session_parse")
 
