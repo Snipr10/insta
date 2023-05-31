@@ -2,6 +2,7 @@ import datetime
 import json
 import time
 
+from instagrapi.extractors import extract_media_v1
 
 from utils import SESSIONS, KEYS, send_message, SOURCE, challenge_code_handler
 from instagrapi import Client
@@ -83,12 +84,52 @@ def parse_key(session):
                     #     is_parse_ok = False
                     #     pass
                     try:
-                        for h in cl.search_hashtags(key["keyword"]):
-                            medias_top1 = cl.hashtag_medias_top_v1(h.name, amount=amount)
-                            res.extend(medias_top1)
-                            medias_top2 = cl.hashtag_medias_recent_v1(h.name, amount=amount)
-                            res.extend(medias_top2)
-                        settings = cl.get_settings()
+                        try:
+                            next_max_id = None
+                            medias_raw = []
+                            try:
+                                for i in range(10):
+                                    res = cl.private.get(
+                                        'https://i.instagram.com/api/v1/fbsearch/search_engine_result_page/',
+                                        params={'query': key["keyword"], 'next_max_id': next_max_id},
+                                        proxies=cl.private.proxies
+                                    ).json()
+                                    next_max_id = res['reels_max_id']
+                                    for s in res['sections']:
+                                        # extract_media_v1(node["media"])
+                                        try:
+                                            layout_content = s['layout_content']
+                                            try:
+                                                medias_raw.extend(
+                                                    list(layout_content['one_by_two_item']['clips']['items']))
+                                            except Exception:
+                                                pass
+                                            try:
+                                                medias_raw.extend(list(layout_content['fill_items']))
+                                            except Exception:
+                                                pass
+                                            try:
+                                                medias_raw.extend(list(layout_content['medias']))
+                                            except Exception:
+                                                pass
+                                            print(1)
+                                        except Exception:
+                                            pass
+                            except Exception as e:
+                                print(e)
+                            for m in medias_raw:
+                                try:
+                                    res.append(extract_media_v1(m["media"]))
+                                except Exception:
+                                    pass
+                            settings = cl.get_settings()
+                        except Exception:
+                            for h in cl.search_hashtags(key["keyword"]):
+                                medias_top1 = cl.hashtag_medias_top_v1(h.name, amount=amount)
+                                res.extend(medias_top1)
+                                medias_top2 = cl.hashtag_medias_recent_v1(h.name, amount=amount)
+                                res.extend(medias_top2)
+                            settings = cl.get_settings()
                     except Exception as e:
                         banned = True
                         error_message = str(e)
