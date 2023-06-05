@@ -145,7 +145,7 @@ def parse_key(session):
                         key["last_modified"] = str(datetime.datetime.now())
 
                     print(
-                        f'''{key["keyword"]}, {key["last_modified"] if errors > 1 and not banned else str(datetime.datetime.now())}''')
+                        f'''{key["keyword"]}, {key["last_modified"] if errors > 1 and not banned else str(datetime.datetime.now())} , now {datetime.datetime.now()}''')
 
                     send_message("insta_source_parse_key_result", body=json.dumps({
                         "id": key["id"],
