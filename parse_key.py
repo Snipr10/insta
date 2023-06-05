@@ -144,7 +144,7 @@ def parse_key(session):
                         pass
                     print(key["keyword"])
                     print(res)
-                    if key.get("last_modified") is not None:
+                    if key.get("last_modified") is None:
                         key["last_modified"] = str(datetime.datetime.now())
 
                     print(
