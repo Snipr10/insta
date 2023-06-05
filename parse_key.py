@@ -164,4 +164,4 @@ def parse_key(session):
             session = None
             settings = None
     except Exception as e:
-        print(f"While {e}")
+        print(f"While key {e}")

@@ -105,5 +105,5 @@ def parse_source(session):
             session = None
             settings = None
     except Exception as e:
-        print(f"While {e}")
+        print(f"While source {e}")
     return session
