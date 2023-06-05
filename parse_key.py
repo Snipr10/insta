@@ -118,12 +118,15 @@ def parse_key(session):
                                         except Exception:
                                             pass
                             except Exception as e:
+                                errors += 1
                                 print(f" {key} {e}")
                             for m in medias_raw:
                                 try:
                                     res.append(extract_media_v1(m["media"]))
                                 except Exception:
                                     pass
+                            if next_max_id is None:
+                                raise Exception("bad reuest")
                             settings = cl.get_settings()
                         except Exception:
                             errors += 1
