@@ -115,7 +115,9 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"parse_key: {e}")
         try:
-            session = parse_source(session)
+            # session = parse_source(session)
+            session = parse_key(session)
+
             # p = multiprocessing.Process(target=parse_source, name="parse_source", args=(None,))
             # p.start()
             # n = 0
