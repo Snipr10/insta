@@ -6,6 +6,7 @@ from instagrapi.extractors import extract_media_v1
 
 from utils import SESSIONS, KEYS, send_message, SOURCE, challenge_code_handler
 from instagrapi import Client
+
 amount = 15
 
 
@@ -138,13 +139,19 @@ def parse_key(session):
                         error_message = str(e)
                         print(f"search_hashtags {e}")
                         pass
+                    print(key["keyword"])
                     print(res)
                     if key.get("last_modified") is not None:
                         key["last_modified"] = str(datetime.datetime.now())
+
+                    print(
+                        f'''{key["keyword"]}, {key["last_modified"] if errors > 1 and not banned else str(datetime.datetime.now())}''')
+
                     send_message("insta_source_parse_key_result", body=json.dumps({
-                            "id": key["id"],
-                            "last_modified": key["last_modified"] if errors > 1 and not banned else str(datetime.datetime.now())
-                        }))
+                        "id": key["id"],
+                        "last_modified": key["last_modified"] if errors > 1 and not banned else str(
+                            datetime.datetime.now())
+                    }))
 
                     json_res = []
                     for r in res:
@@ -154,13 +161,13 @@ def parse_key(session):
                 print("insta_source_ig_session_parse")
 
             send_message("insta_source_ig_session_parse", body=json.dumps({
-                    "id": session["id"],
-                    "last_parsing": str(datetime.datetime.now()),
-                    "banned": banned,
-                    "error_message": error_message,
-                    "session_id": None,
-                    "settings": settings
-                }))
+                "id": session["id"],
+                "last_parsing": str(datetime.datetime.now()),
+                "banned": banned,
+                "error_message": error_message,
+                "session_id": None,
+                "settings": settings
+            }))
             session = None
             settings = None
     except Exception as e:
