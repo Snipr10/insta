@@ -49,7 +49,7 @@ def parse_key(session):
                     # session_id = session['session_id']
                     # print(f"Login Successfull {session_id}")
                 except Exception as e:
-                    print(f"Client {e}")
+                    print(f"Client {key} {e}")
                     banned = True
                     # error_message = str(e)
                     # session_id = None
@@ -118,7 +118,7 @@ def parse_key(session):
                                         except Exception:
                                             pass
                             except Exception as e:
-                                print(e)
+                                print(f" {key} {e}")
                             for m in medias_raw:
                                 try:
                                     res.append(extract_media_v1(m["media"]))
@@ -137,7 +137,7 @@ def parse_key(session):
                         errors += 1
                         banned = True
                         error_message = str(e)
-                        print(f"search_hashtags {e}")
+                        print(f"search_hashtags {key} {e}")
                         pass
                     print(key["keyword"])
                     print(res)
