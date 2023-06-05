@@ -25,6 +25,7 @@ def parse_key(session):
             print(session)
             # session_id = session['session_id']
             settings = session['settings']
+            errors = 0
             if len(KEYS) == 0:
                 print("No Keys")
                 # time.sleep(60)
@@ -124,6 +125,7 @@ def parse_key(session):
                                     pass
                             settings = cl.get_settings()
                         except Exception:
+                            errors += 1
                             for h in cl.search_hashtags(key["keyword"]):
                                 medias_top1 = cl.hashtag_medias_top_v1(h.name, amount=amount)
                                 res.extend(medias_top1)
@@ -131,16 +133,19 @@ def parse_key(session):
                                 res.extend(medias_top2)
                             settings = cl.get_settings()
                     except Exception as e:
+                        errors += 1
                         banned = True
                         error_message = str(e)
                         print(f"search_hashtags {e}")
                         pass
                     print(res)
-
+                    if key.get("last_modified") is not None:
+                        key["last_modified"] = str(datetime.datetime.now())
                     send_message("insta_source_parse_key_result", body=json.dumps({
-                        "id": key["id"],
-                        "last_modified": str(datetime.datetime.now())
-                    }))
+                            "id": key["id"],
+                            "last_modified": key["last_modified"] if errors > 1 and not banned else str(datetime.datetime.now())
+                        }))
+
                     json_res = []
                     for r in res:
                         json_res.append(json.loads(r.json()))
