@@ -90,7 +90,7 @@ def parse_key(session):
                             next_max_id = None
                             medias_raw = []
                             try:
-                                for i in range(10):
+                                for i in range(25):
                                     result = cl.private.get(
                                         'https://i.instagram.com/api/v1/fbsearch/search_engine_result_page/',
                                         params={'query': key["keyword"], 'next_max_id': next_max_id},
