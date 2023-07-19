@@ -21,7 +21,7 @@ def get_sessions():
         try:
             print(f"SESSIONS {len(SESSIONS)}")
 
-            while len(SESSIONS) > 10:
+            while len(SESSIONS) > 100:
                 time.sleep(2)
             SESSIONS.append(json.loads(body.decode("utf-8")))
         except Exception as e:
