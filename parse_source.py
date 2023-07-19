@@ -41,14 +41,6 @@ def parse_source(session):
                 print(source)
                 print(f"source date {source['last_modified']}")
                 print(f"source date {datetime.datetime.fromisoformat(source['last_modified'])}")
-                print(settings)
-                print("try setting")
-                try:
-                    json.loads(settings)
-                    print("ok setting")
-
-                except Exception as e:
-                    print(f"get settings {e}")
 
                 cl = Client(
                     proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",

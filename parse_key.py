@@ -26,14 +26,7 @@ def parse_key(session):
             print(session)
             # session_id = session['session_id']
             settings = session['settings']
-            print(settings)
-            print("try setting")
-            try:
-                json.loads(settings)
-                print("ok setting")
 
-            except Exception as e:
-                print(f"get settings {e}")
             errors = 0
             if len(KEYS) == 0:
                 print("No Keys")
