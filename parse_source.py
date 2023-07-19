@@ -2,7 +2,7 @@ import datetime
 import json
 import time
 
-from utils import SESSIONS, KEYS, send_message, SOURCE, challenge_code_handler
+from utils import SESSIONS, KEYS, send_message, SOURCE, challenge_code_handler, get_settings
 from instagrapi import Client
 from instagrapi.exceptions import UserNotFound
 
@@ -46,8 +46,7 @@ def parse_source(session):
                     proxy=f"http://{session['proxy_login']}:{session['proxy_pass']}@{session['proxy_ip']}:{session['proxy_port']}",
                     settings=session['settings']
                 )
-                settings = cl.get_settings()
-
+                settings = get_settings(cl)
 
                 try:
                     print("start user")
@@ -66,7 +65,7 @@ def parse_source(session):
                     try:
                         print("start user")
                         res = cl.user_medias(user_id, amount)
-                        settings = cl.get_settings()
+                        settings = get_settings(cl)
 
                     except UserNotFound:
                         disabled = 1

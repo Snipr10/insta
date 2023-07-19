@@ -4,7 +4,7 @@ import time
 
 from instagrapi.extractors import extract_media_v1
 
-from utils import SESSIONS, KEYS, send_message, SOURCE, challenge_code_handler
+from utils import SESSIONS, KEYS, send_message, SOURCE, challenge_code_handler, get_settings
 from instagrapi import Client
 
 amount = 15
@@ -43,7 +43,7 @@ def parse_key(session):
                         settings=session['settings']
                     )
                     cl.challenge_code_handler = challenge_code_handler
-                    settings = cl.get_settings()
+                    settings = get_settings(cl)
                     # cl.init()
                     # cl.login_by_sessionid(session['session_id'])
                     # session_id = session['session_id']
@@ -127,7 +127,7 @@ def parse_key(session):
                                     pass
                             if next_max_id is None:
                                 raise Exception("bad reuest")
-                            settings = cl.get_settings()
+                            settings = get_settings(cl)
                         except Exception:
                             errors += 1
                             for h in cl.search_hashtags(key["keyword"]):
@@ -135,7 +135,7 @@ def parse_key(session):
                                 res.extend(medias_top1)
                                 medias_top2 = cl.hashtag_medias_recent_v1(h.name, amount=amount)
                                 res.extend(medias_top2)
-                            settings = cl.get_settings()
+                            settings = get_settings(cl)
                     except Exception as e:
                         errors += 1
                         banned = True

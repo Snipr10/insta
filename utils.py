@@ -36,3 +36,13 @@ def challenge_code_handler(username, choice):
     elif choice == ChallengeChoice.EMAIL:
         return None
     return False
+
+
+def get_settings(cl):
+    settings = cl.get_settings()
+    settings["authorization_data"] = cl.authorization_data
+    settings["cookies"] = {
+        "sessionid": cl.authorization_data["sessionid"]
+    }
+    return settings
+
