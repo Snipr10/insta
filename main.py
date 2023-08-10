@@ -1,8 +1,6 @@
 import threading
 import time
 
-from instagrapi.extractors import extract_media_v1
-import signal
 from main_get_key import get_keys_while
 from main_get_session import get_sessions_while
 from main_get_source import get_source_while
@@ -11,8 +9,6 @@ from parse_source import parse_source
 
 session = None
 amount = 30
-
-time_for_parser = 60*5
 
 
 def challenge_code_handler(username, choice):
@@ -23,26 +19,6 @@ def challenge_code_handler(username, choice):
         return None
     return False
 
-
-def time_break(func):
-    """
-    Декоратор, останавливающий работу декорируемой функции, если её
-    выполнение, заняло более n секунд
-    """
-
-    def wrapper(*args, **kwargs):
-        try:
-            print("Запускаем функцию")
-            signal.alarm(time_for_parser)
-            res = func(*args, **kwargs)
-            signal.alarm(0)
-            print("Нормальное завершение")
-            return res
-        except Exception as e:
-            print(e)
-            return None
-
-    return wrapper
 
 
 if __name__ == '__main__':

@@ -1,11 +1,9 @@
 import datetime
 import json
-import time
 
 from instagrapi.extractors import extract_media_v1
 
-from main import time_break
-from utils import SESSIONS, KEYS, send_message, SOURCE, challenge_code_handler, get_settings
+from utils import SESSIONS, KEYS, send_message, challenge_code_handler, get_settings, time_break
 from instagrapi import Client
 
 amount = 15

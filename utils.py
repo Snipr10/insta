@@ -1,9 +1,34 @@
+import signal
+
 import pika
 from datetime import timedelta
 
 SESSIONS = []
 KEYS = []
 SOURCE = []
+
+time_for_parser = 60*5
+
+
+def time_break(func):
+    """
+    Декоратор, останавливающий работу декорируемой функции, если её
+    выполнение, заняло более n секунд
+    """
+
+    def wrapper(*args, **kwargs):
+        try:
+            print("Запускаем функцию")
+            signal.alarm(time_for_parser)
+            res = func(*args, **kwargs)
+            signal.alarm(0)
+            print("Нормальное завершение")
+            return res
+        except Exception as e:
+            print(e)
+            return None
+
+    return wrapper
 
 
 def get_chanel():

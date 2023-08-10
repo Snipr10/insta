@@ -2,8 +2,7 @@ import datetime
 import json
 import time
 
-from main import time_break
-from utils import SESSIONS, KEYS, send_message, SOURCE, challenge_code_handler, get_settings
+from utils import SESSIONS, send_message, SOURCE, get_settings, time_break
 from instagrapi import Client
 from instagrapi.exceptions import UserNotFound
 
