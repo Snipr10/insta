@@ -2,6 +2,7 @@ import datetime
 import json
 import time
 
+from main import time_break
 from utils import SESSIONS, KEYS, send_message, SOURCE, challenge_code_handler, get_settings
 from instagrapi import Client
 from instagrapi.exceptions import UserNotFound
@@ -9,6 +10,7 @@ from instagrapi.exceptions import UserNotFound
 amount = 15
 
 
+@time_break
 def parse_source(session):
     try:
         # print(f"sessions {len(SESSIONS)}   {session}")
@@ -52,6 +54,7 @@ def parse_source(session):
                     print("start user")
                     user_id = cl.user_id_from_username(source["data"])
                 except UserNotFound:
+                    settings = get_settings(cl)
                     disabled = 1
                 except Exception as e:
                     if "Status 404" in e:

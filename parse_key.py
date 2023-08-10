@@ -4,12 +4,14 @@ import time
 
 from instagrapi.extractors import extract_media_v1
 
+from main import time_break
 from utils import SESSIONS, KEYS, send_message, SOURCE, challenge_code_handler, get_settings
 from instagrapi import Client
 
 amount = 15
 
 
+@time_break
 def parse_key(session):
     try:
         # print(f"sessions {len(SESSIONS)}   {session}")
