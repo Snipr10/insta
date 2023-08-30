@@ -6,7 +6,7 @@ from utils import SESSIONS, send_message, SOURCE, get_settings, time_break
 from instagrapi import Client
 from instagrapi.exceptions import UserNotFound
 
-amount = 15
+amount = 55
 
 
 @time_break

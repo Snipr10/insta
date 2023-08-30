@@ -6,7 +6,7 @@ from instagrapi.extractors import extract_media_v1
 from utils import SESSIONS, KEYS, send_message, challenge_code_handler, get_settings, time_break
 from instagrapi import Client
 
-amount = 15
+amount = 55
 
 
 @time_break
@@ -91,7 +91,7 @@ def parse_key(session):
                             next_max_id = None
                             medias_raw = []
                             try:
-                                for i in range(25):
+                                for i in range(amount):
                                     result = cl.private.get(
                                         'https://i.instagram.com/api/v1/fbsearch/search_engine_result_page/',
                                         params={'query': key["keyword"], 'next_max_id': next_max_id},
