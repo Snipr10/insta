@@ -101,6 +101,8 @@ def parse_key(session):
                                     print(f"result {len(result['sections'])} {key['keyword']}")
                                     if next_max_id is not None and len(result['sections']) == 0:
                                         break
+                                    if len(medias_raw) > amount:
+                                        break
                                     next_max_id = result['reels_max_id']
                                     for s in result['sections']:
                                         # extract_media_v1(node["media"])
