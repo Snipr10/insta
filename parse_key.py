@@ -98,7 +98,7 @@ def parse_key(session):
                                         params={'query': key["keyword"], 'next_max_id': next_max_id},
                                         proxies=cl.private.proxies
                                     ).json()
-                                    print(f"result {result['sections']} {key['keyword']}")
+                                    print(f"result {len(result['sections'])} {key['keyword']}")
                                     if next_max_id is not None and len(result['sections']) == 0:
                                         break
                                     next_max_id = result['reels_max_id']
