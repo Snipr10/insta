@@ -98,7 +98,9 @@ def parse_key(session):
                                         params={'query': key["keyword"], 'next_max_id': next_max_id},
                                         proxies=cl.private.proxies
                                     ).json()
-                                    print(result)
+                                    print(f"result {result['sections']} {key['keyword']}")
+                                    if next_max_id is not None and len(result['sections']) == 0:
+                                        break
                                     next_max_id = result['reels_max_id']
                                     for s in result['sections']:
                                         # extract_media_v1(node["media"])
