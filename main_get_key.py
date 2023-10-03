@@ -20,7 +20,7 @@ def get_keys():
     def callback(ch, method, properties, body):
         try:
             print(f"KEYS {len(KEYS)}")
-            while len(KEYS) > 1000:
+            while len(KEYS) > 10:
                 time.sleep(2)
             KEYS.append(json.loads(body.decode("utf-8")))
         except Exception as e:
