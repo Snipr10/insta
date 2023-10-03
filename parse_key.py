@@ -180,6 +180,7 @@ def parse_key(session):
             print(f"banned_session {banned_session}")
             if banned:
                 try:
+                    print(f"test session")
                     cl.account_info()
                     banned_session = False
                 except Exception as e:
