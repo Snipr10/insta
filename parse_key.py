@@ -181,8 +181,8 @@ def parse_key(session):
                 try:
                     cl.account_info()
                     banned_session = False
-                except Exception:
-                    pass
+                except Exception as e:
+                    error_message += str(e)
             send_message("insta_source_ig_session_parse", body=json.dumps({
                 "id": session["id"],
                 "last_parsing": str(datetime.datetime.now()),
