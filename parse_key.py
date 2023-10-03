@@ -13,6 +13,7 @@ amount = 155
 def parse_key(session):
     try:
         # print(f"sessions {len(SESSIONS)}   {session}")
+        res = []
 
         banned = False
         error_message = ""
@@ -126,6 +127,7 @@ def parse_key(session):
                                             pass
                             except Exception as e:
                                 errors += 1
+                                error_message += str(e)
                                 print(f" {key} {e}")
                             for m in medias_raw:
                                 try:
@@ -145,11 +147,12 @@ def parse_key(session):
                         except Exception:
                             errors += 1
                             banned = True
+                            error_message += str(e)
 
                     except Exception as e:
                         errors += 1
                         banned = True
-                        error_message = str(e)
+                        error_message += str(e)
                         print(f"search_hashtags {key} {e}")
                         pass
                     print(key["keyword"])
@@ -173,11 +176,11 @@ def parse_key(session):
                     print(f"send {len(json_res)}")
                     send_message("insta_key_result", body=json.dumps(json_res))
                 print("insta_source_ig_session_parse")
-
+            banned_session = True if banned and len(res) == 0 else False
             send_message("insta_source_ig_session_parse", body=json.dumps({
                 "id": session["id"],
                 "last_parsing": str(datetime.datetime.now()),
-                "banned": banned,
+                "banned": banned_session,
                 "error_message": error_message,
                 "session_id": None,
                 "settings": settings
