@@ -144,7 +144,7 @@ def parse_key(session):
                                 res.extend(medias_top1)
 
                             settings = get_settings(cl)
-                        except Exception:
+                        except Exception as e:
                             errors += 1
                             banned = True
                             error_message += str(e)
@@ -177,12 +177,16 @@ def parse_key(session):
                     send_message("insta_key_result", body=json.dumps(json_res))
                 print("insta_source_ig_session_parse")
             banned_session = banned
+            print(f"banned_session {banned_session}")
             if banned:
                 try:
                     cl.account_info()
                     banned_session = False
                 except Exception as e:
+
                     error_message += str(e)
+            if not banned_session:
+                error_message = None
             send_message("insta_source_ig_session_parse", body=json.dumps({
                 "id": session["id"],
                 "last_parsing": str(datetime.datetime.now()),
