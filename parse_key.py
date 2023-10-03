@@ -176,7 +176,13 @@ def parse_key(session):
                     print(f"send {len(json_res)}")
                     send_message("insta_key_result", body=json.dumps(json_res))
                 print("insta_source_ig_session_parse")
-            banned_session = True if banned and len(res) == 0 else False
+            banned_session = banned
+            if banned:
+                try:
+                    cl.account_info()
+                    banned_session = False
+                except Exception:
+                    pass
             send_message("insta_source_ig_session_parse", body=json.dumps({
                 "id": session["id"],
                 "last_parsing": str(datetime.datetime.now()),
