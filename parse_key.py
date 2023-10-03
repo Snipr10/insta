@@ -184,7 +184,7 @@ def parse_key(session):
                     cl.account_info()
                     banned_session = False
                 except Exception as e:
-
+                    print(f"Enable to get account {e}")
                     error_message += str(e)
             if not banned_session:
                 error_message = None
