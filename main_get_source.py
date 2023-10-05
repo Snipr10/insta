@@ -21,7 +21,7 @@ def get_source():
         try:
             print(f"Source {len(SOURCE)}")
 
-            while len(SOURCE) > 10:
+            while len(SOURCE) > 3:
                 time.sleep(2)
             SOURCE.append(json.loads(body.decode("utf-8")))
         except Exception as e:
