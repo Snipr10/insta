@@ -6,32 +6,32 @@ services:
     command: python3 main.py
     restart: always
 
-#  main_2:
-#    build: ./
-#    command: python3 main.py
-#    restart: always
+  main_2:
+    build: ./
+    command: python3 main.py
+    restart: always
+
+  main_3:
+    build: ./
+    command: python3 main.py
+    restart: always
 #
-#  main_3:
-#    build: ./
-#    command: python3 main.py
-#    restart: always
-##
-#  main_4:
-#    build: ./
-#    command: python3 main.py
-#    restart: always
-#
-#  main_5:
-#    build: ./
-#    command: python3 main.py
-#    restart: always
-#
-#  main_6:
-#    build: ./
-#    command: python3 main.py
-#    restart: always
-#
-#  main_7:
-#    build: ./
-#    command: python3 main.py
-#    restart: always
+  main_4:
+    build: ./
+    command: python3 main.py
+    restart: always
+
+  main_5:
+    build: ./
+    command: python3 main.py
+    restart: always
+
+  main_6:
+    build: ./
+    command: python3 main.py
+    restart: always
+
+  main_7:
+    build: ./
+    command: python3 main.py
+    restart: always
