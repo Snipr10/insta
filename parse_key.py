@@ -1,5 +1,6 @@
 import datetime
 import json
+import time
 
 from instagrapi.extractors import extract_media_v1
 
@@ -94,6 +95,7 @@ def parse_key(session):
                             try:
                                 print(f'Parser key {key["keyword"]}' )
                                 for i in range(amount):
+                                    time.sleep(2)
                                     result = cl.private.get(
                                         'https://i.instagram.com/api/v1/fbsearch/search_engine_result_page/',
                                         params={'query': key["keyword"], 'next_max_id': next_max_id},
@@ -136,10 +138,13 @@ def parse_key(session):
                                     pass
                             if next_max_id is None:
                                 raise Exception("bad reuest")
+                            time.sleep(3)
                             hash = cl.search_hashtags(key["keyword"])
                             for h in hash[:2]:
+                                time.sleep(3)
                                 medias_top2 = cl.hashtag_medias_recent_v1(h.name, amount=amount)
                                 res.extend(medias_top2)
+                                time.sleep(2)
                                 medias_top1 = cl.hashtag_medias_top_v1(h.name, amount=amount)
                                 res.extend(medias_top1)
 
