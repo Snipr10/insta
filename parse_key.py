@@ -92,53 +92,53 @@ def parse_key(session):
                         try:
                             next_max_id = None
                             medias_raw = []
-                            try:
-                                print(f'Parser key {key["keyword"]}' )
-                                for i in range(amount):
-                                    time.sleep(2)
-                                    result = cl.private.get(
-                                        'https://i.instagram.com/api/v1/fbsearch/search_engine_result_page/',
-                                        params={'query': key["keyword"], 'next_max_id': next_max_id},
-                                        proxies=cl.private.proxies
-                                    ).json()
-                                    print(f"result {len(result['sections'])} {key['keyword']}")
-                                    if next_max_id is not None and len(result['sections']) == 0:
-                                        break
-                                    if len(medias_raw) > amount:
-                                        break
-                                    next_max_id = result['reels_max_id']
-                                    for s in result['sections']:
-                                        # extract_media_v1(node["media"])
-                                        try:
-                                            layout_content = s['layout_content']
-                                            try:
-                                                medias_raw.extend(
-                                                    list(layout_content['one_by_two_item']['clips']['items']))
-                                            except Exception:
-                                                pass
-                                            try:
-                                                medias_raw.extend(list(layout_content['fill_items']))
-                                            except Exception:
-                                                pass
-                                            try:
-                                                medias_raw.extend(list(layout_content['medias']))
-                                            except Exception:
-                                                pass
-                                            print(1)
-                                        except Exception:
-                                            pass
-                            except Exception as e:
-                                errors += 1
-                                error_message += str(e)
-                                print(f" {key} {e}")
-                            for m in medias_raw:
-                                try:
-                                    res.append(extract_media_v1(m["media"]))
-                                except Exception:
-                                    pass
-                            if next_max_id is None:
-                                raise Exception("bad reuest")
-                            time.sleep(3)
+                            # try:
+                            #     print(f'Parser key {key["keyword"]}' )
+                            #     for i in range(amount):
+                            #         time.sleep(2)
+                            #         result = cl.private.get(
+                            #             'https://i.instagram.com/api/v1/fbsearch/search_engine_result_page/',
+                            #             params={'query': key["keyword"], 'next_max_id': next_max_id},
+                            #             proxies=cl.private.proxies
+                            #         ).json()
+                            #         print(f"result {len(result['sections'])} {key['keyword']}")
+                            #         if next_max_id is not None and len(result['sections']) == 0:
+                            #             break
+                            #         if len(medias_raw) > amount:
+                            #             break
+                            #         next_max_id = result['reels_max_id']
+                            #         for s in result['sections']:
+                            #             # extract_media_v1(node["media"])
+                            #             try:
+                            #                 layout_content = s['layout_content']
+                            #                 try:
+                            #                     medias_raw.extend(
+                            #                         list(layout_content['one_by_two_item']['clips']['items']))
+                            #                 except Exception:
+                            #                     pass
+                            #                 try:
+                            #                     medias_raw.extend(list(layout_content['fill_items']))
+                            #                 except Exception:
+                            #                     pass
+                            #                 try:
+                            #                     medias_raw.extend(list(layout_content['medias']))
+                            #                 except Exception:
+                            #                     pass
+                            #                 print(1)
+                            #             except Exception:
+                            #                 pass
+                            # except Exception as e:
+                            #     errors += 1
+                            #     error_message += str(e)
+                            #     print(f" {key} {e}")
+                            # for m in medias_raw:
+                            #     try:
+                            #         res.append(extract_media_v1(m["media"]))
+                            #     except Exception:
+                            #         pass
+                            # if next_max_id is None:
+                            #     raise Exception("bad reuest")
+                            # time.sleep(3)
                             hash = cl.search_hashtags(key["keyword"])
                             for h in hash[:2]:
                                 time.sleep(3)
