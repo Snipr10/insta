@@ -43,4 +43,4 @@ if __name__ == '__main__':
             session = parse_source(session)
         except Exception as e:
             print(f"parse_source: {e}")
-        time.sleep(5)
+        # time.sleep(0)
