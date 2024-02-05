@@ -5,6 +5,16 @@ services:
     build: ./
     command: python3 main.py
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 2Gb
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+
+
 
 #  main_2:
 #    build: ./
