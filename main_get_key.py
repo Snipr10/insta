@@ -19,10 +19,14 @@ def get_keys():
 
     def callback(ch, method, properties, body):
         try:
+            from utils import SESSIONS
+
             print(f"KEYS {len(KEYS)}")
             while len(KEYS) > 3:
                 time.sleep(2)
                 print(f"KEYS {len(KEYS)}")
+                print(f"SESSIONS {len(SESSIONS)}")
+
             KEYS.append(json.loads(body.decode("utf-8")))
         except Exception as e:
             print(f"callback{e}")
