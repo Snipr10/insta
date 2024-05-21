@@ -36,11 +36,15 @@ if __name__ == '__main__':
     while True:
         print("start")
         try:
+            print(f"start key")
             session = parse_key(session)
+            print(f"stop key")
         except Exception as e:
             print(f"parse_key: {e}")
         try:
+            print(f"start source")
             session = parse_source(session)
+            print(f"stop source")
         except Exception as e:
             print(f"parse_source: {e}")
         # time.sleep(0)
