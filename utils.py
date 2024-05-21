@@ -7,7 +7,7 @@ SESSIONS = []
 KEYS = []
 SOURCE = []
 
-time_for_parser = 60*5
+time_for_parser = 60*2
 
 
 def time_break(func):
@@ -18,14 +18,16 @@ def time_break(func):
 
     def wrapper(*args, **kwargs):
         try:
-            print("Запускаем функцию")
+            print(f"Запускаем функцию {datetime.datetime.now()}")
             signal.alarm(time_for_parser)
             res = func(*args, **kwargs)
             signal.alarm(0)
-            print("Нормальное завершение")
+            print(f"Нормальное завершение {datetime.datetime.now()}")
             return res
         except Exception as e:
             print(e)
+            print(f"НЕ нормальное завершение {datetime.datetime.now()}")
+
             return None
 
     return wrapper
