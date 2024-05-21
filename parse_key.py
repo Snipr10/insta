@@ -95,6 +95,7 @@ def parse_key(session):
                             try:
                                 print(f'Parser key {key["keyword"]}' )
                                 for i in range(amount):
+                                    print(amount)
                                     time.sleep(2)
                                     result = cl.private.get(
                                         'https://i.instagram.com/api/v1/fbsearch/search_engine_result_page/',
