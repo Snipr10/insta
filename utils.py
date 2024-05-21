@@ -2,7 +2,7 @@ import signal
 
 import pika
 from datetime import timedelta
-
+import datetime
 SESSIONS = []
 KEYS = []
 SOURCE = []
