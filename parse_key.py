@@ -100,7 +100,7 @@ def parse_key(session):
                                     result = cl.private.get(
                                         'https://i.instagram.com/api/v1/fbsearch/search_engine_result_page/',
                                         params={'query': key["keyword"], 'next_max_id': next_max_id},
-                                        proxies=cl.private.proxies
+                                        proxies=cl.private.proxies, timeout=25
                                     ).json()
                                     print(f"result {len(result['sections'])} {key['keyword']}")
                                     if next_max_id is not None and len(result['sections']) == 0:
