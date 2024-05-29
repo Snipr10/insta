@@ -14,162 +14,162 @@ services:
       options:
         max-size: "100m"
 
-  main_2:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_3:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_4:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_5:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_6:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_7:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_8:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_9:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_10:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_11:
-    build: ./
-    command: python3 main.py
-    restart: always
-    deploy:
-      resources:
-        limits:
-          memory: 2Gb
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-
-  main_12:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_13:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_14:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_15:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_16:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_17:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_18:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_19:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_20:
-    build: ./
-    command: python3 main.py
-    restart: always
-  main_21:
-    build: ./
-    command: python3 main.py
-    restart: always
-    deploy:
-      resources:
-        limits:
-          memory: 2Gb
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-
-  main_22:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_23:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_24:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_25:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_26:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_27:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_28:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_29:
-    build: ./
-    command: python3 main.py
-    restart: always
-
-  main_30:
-    build: ./
-    command: python3 main.py
-    restart: always
+#  main_2:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_3:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_4:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_5:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_6:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_7:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_8:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_9:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_10:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_11:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 2Gb
+#    logging:
+#      driver: "json-file"
+#      options:
+#        max-size: "100m"
+#
+#  main_12:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_13:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_14:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_15:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_16:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_17:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_18:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_19:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_20:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#  main_21:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 2Gb
+#    logging:
+#      driver: "json-file"
+#      options:
+#        max-size: "100m"
+#
+#  main_22:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_23:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_24:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_25:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_26:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_27:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_28:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_29:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
+#
+#  main_30:
+#    build: ./
+#    command: python3 main.py
+#    restart: always
