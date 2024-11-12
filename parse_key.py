@@ -7,7 +7,7 @@ from instagrapi.extractors import extract_media_v1
 from utils import SESSIONS, KEYS, send_message, challenge_code_handler, get_settings, time_break
 from instagrapi import Client
 
-amount = 155
+amount = 355
 
 
 @time_break
